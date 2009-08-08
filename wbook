@@ -5,9 +5,11 @@ from libwbook import inputing, searching, outputing
 
 def _parse_args():
     parser = optparse.OptionParser()
+    parser.add_option("-d", "--dict")
     parser.add_option("-b", "--back", type="int")
     parser.add_option("-f", "--forth", type="int")
-    parser.set_defaults(back=3, forth=15)
+    parser.set_defaults(back=3, forth=15,
+            dict="/opt/wbook/share/wbook/final.eng")
 
     return parser.parse_args()
 
