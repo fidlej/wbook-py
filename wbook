@@ -23,8 +23,8 @@ def main():
     try:
         while True:
             line = reader.read_line()
-            results = search.find(line)
-            outputer.display(results)
+            bresults, fresults = search.find(line)
+            outputer.display(bresults, fresults)
             outputer.say(line)
 
     except EOFError:

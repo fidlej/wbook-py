@@ -9,14 +9,16 @@ class Outputer(object):
     def __init__(self, options):
         self.back = options.back
 
-    def display(self, results):
+    def display(self, bresults, fresults):
         print SEARCH_SEPARATOR
-        for i, row in enumerate(results):
-            if i == self.back:
-                print SEPARATOR
-            sys.stdout.write(row)
+        self._display_results(bresults)
+        self._display_results(fresults)
 
-        print SEPARATOR
+    def _display_results(self, results):
+        if results:
+            for row in results:
+                sys.stdout.write(row)
+            print SEPARATOR
 
     def say(self, line):
         #TODO: start the festival

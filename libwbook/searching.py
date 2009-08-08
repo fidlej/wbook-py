@@ -9,11 +9,14 @@ class Search(object):
         self.dictionary = _FileAsList(options.dict)
 
     def find(self, line):
+        """Returns (back_results, forth_results)
+        for the given line.
+        """
         index = bisect.bisect_left(self.dictionary, line)
         start = max(0, index - self.back)
         end = index + self.forth
         results = [self.dictionary[i] for i in xrange(start, end)]
-        return self.dictionary[start:end]
+        return self.dictionary[start:index], self.dictionary[index:end]
 
 class _FileAsList(object):
     def __init__(self, filename, line_width=82):
