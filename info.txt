@@ -11,3 +11,4 @@ Display:
 
 Later:
 - Provide the data files.
+- Put the first line also to the readline history.

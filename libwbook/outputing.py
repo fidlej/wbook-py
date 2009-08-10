@@ -1,5 +1,7 @@
 
 import sys
+import os.path
+import logging
 
 SEARCH_SEPARATOR = (
         "===============================================================")
@@ -21,5 +23,8 @@ class Outputer(object):
             print SEPARATOR
 
     def say(self, line):
-        #TODO: start the festival
-        print "say:", line
+        import subprocess
+        base = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        cmd = os.path.join(base, "util", "wbook_say")
+        logging.debug("Executing: %r", cmd)
+        subprocess.call([cmd, line], close_fds=True)

@@ -1,0 +1,18 @@
+#!/bin/sh
+# Says the given text.
+# Uses rsynth or festival.
+
+# Play audio on background
+if which festival >/dev/null 2>&1 ; then
+    (printf '%s' "$*" | festival --tts) &
+else
+    if which say >/dev/null 2>&1 ; then
+        (printf '%s' "$*" | say >/dev/null) &
+    fi
+fi
+
+# Show phonetic form
+if which say >/dev/null 2>&1 ; then
+    printf '%s' "$*" | say -a -v 2>&1 >/dev/null
+fi
+

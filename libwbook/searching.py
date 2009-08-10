@@ -29,8 +29,8 @@ def _search_up(items, x):
         else: hi = mid
     return lo
 
-def _compare(line, word):
-    return cmp(line.lower(), word.lower())
+def _compare(row, line):
+    return cmp(row.lower(), line.lower())
 
 class _FileAsList(object):
     def __init__(self, filename, line_width=82):
