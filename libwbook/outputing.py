@@ -26,5 +26,6 @@ class Outputer(object):
         import subprocess
         base = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         cmd = os.path.join(base, "util", "wbook_say")
-        logging.debug("Executing: %r", cmd)
-        subprocess.call([cmd, line], close_fds=True)
+        args = [cmd, line]
+        logging.debug("Executing: %r", args)
+        subprocess.call(args, close_fds=True)
