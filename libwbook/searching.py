@@ -1,5 +1,4 @@
 
-import bisect
 import os.path
 
 class Search(object):
@@ -12,11 +11,26 @@ class Search(object):
         """Returns (back_results, forth_results)
         for the given line.
         """
-        index = bisect.bisect_left(self.dictionary, line)
+        index = _search_up(self.dictionary, line)
         start = max(0, index - self.back)
         end = index + self.forth
         results = [self.dictionary[i] for i in xrange(start, end)]
         return self.dictionary[start:index], self.dictionary[index:end]
+
+def _search_up(items, x):
+    """Finds the index that is before any value equal to x.
+    """
+    # Taken from the bisect_left()
+    lo = 0
+    hi = len(items)
+    while lo < hi:
+        mid = (lo+hi)//2
+        if _compare(items[mid], x) < 0: lo = mid+1
+        else: hi = mid
+    return lo
+
+def _compare(line, word):
+    return cmp(line.lower(), word.lower())
 
 class _FileAsList(object):
     def __init__(self, filename, line_width=82):
