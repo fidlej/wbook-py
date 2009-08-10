@@ -18,7 +18,7 @@ class Search(object):
         return self.dictionary[start:index], self.dictionary[index:end]
 
 def _search_up(items, x):
-    """Finds the index that is before any value equal to x.
+    """Finds the index of x or before any value bigger than x.
     """
     # Taken from the bisect_left()
     lo = 0
