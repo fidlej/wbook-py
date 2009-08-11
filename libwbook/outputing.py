@@ -3,14 +3,16 @@ import sys
 import os.path
 import logging
 
+from libwbook.encoding import out
+
 SEARCH_SEPARATOR = (
         "===============================================================")
 SEPARATOR = "---------------------------------------------------------------"
 
 class Outputer(object):
-    def __init__(self, options, output_encoding="utf-8"):
+    def __init__(self, options):
         self.back = options.back
-        self.output_encoding = output_encoding
+        self.quiet = options.quiet
 
     def display(self, bresults, fresults):
         print SEARCH_SEPARATOR
@@ -20,10 +22,13 @@ class Outputer(object):
     def _display_results(self, results):
         if results:
             for row in results:
-                sys.stdout.write(row.encode(self.output_encoding))
+                sys.stdout.write(out(row))
             print SEPARATOR
 
     def say(self, line):
+        if self.quiet:
+            return
+
         import subprocess
         base = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         cmd = os.path.join(base, "util", "wbook_say")

@@ -1,10 +1,11 @@
 
 import readline
 
+from libwbook.encoding import incode
+
 class Reader(object):
-    def __init__(self, line="", input_encoding="utf-8"):
-        self.line = unicode(line, input_encoding)
-        self.input_encoding = input_encoding
+    def __init__(self, arg_bytes=""):
+        self.line = incode(arg_bytes)
 
     def read_line(self):
         if self.line:
@@ -13,4 +14,4 @@ class Reader(object):
             readline.add_history(line)
             return line
 
-        return unicode(raw_input("wbook> "), self.input_encoding)
+        return incode(raw_input("wbook> "))

@@ -5,4 +5,5 @@ TODO:
 
 Later:
 - Provide the completer for the words.
-- Provide the data files.
+- Detect the console encoding.
+
