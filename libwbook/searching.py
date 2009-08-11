@@ -1,5 +1,6 @@
 
 import os.path
+import unicodedata
 
 class Search(object):
     def __init__(self, options):
@@ -30,7 +31,21 @@ def _search_up(items, x):
     return lo
 
 def _compare(row, line):
-    return cmp(row.lower(), line.lower())
+    return cmp(_normalize(row), _normalize(line))
+
+def _normalize(text):
+    """Normalizes the text for sorting.
+    """
+    return _separate_accents(text.lower())
+
+def _separate_accents(text):
+    """Moves an accent after its letter.
+    So sorting will place an accented letter after non-accented one.
+    """
+    chars = []
+    for c in unicodedata.normalize("NFD", text):
+        chars.append(c)
+    return "".join(chars)
 
 class _FileAsList(object):
     def __init__(self, filename, line_width=82, file_encoding="iso-8859-2"):

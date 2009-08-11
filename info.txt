@@ -2,9 +2,6 @@
 //-----------------------------------------------------------------
 TODO:
 
-Search:
-    - Use the Czech sorting order for the comparison.
-
 Later:
 - Provide the data files.
 - Put the first line also to the readline history.
