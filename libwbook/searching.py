@@ -41,6 +41,7 @@ def _normalize(text):
 def _separate_accents(text):
     """Moves an accent after its letter.
     So sorting will place an accented letter after non-accented one.
+    The dictionaries are sorted the same way.
     """
     chars = []
     for c in unicodedata.normalize("NFD", text):
