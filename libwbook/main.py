@@ -11,6 +11,7 @@ from libwbook.dating import apppath
 DEFAULT_DICT = apppath("data", "english.dict")
 DEFAULT_BACK = 3
 DEFAULT_FORTH = 15
+DEFAULT_QUIET = False
 
 def _parse_args():
     parser = optparse.OptionParser(__doc__)
@@ -21,12 +22,12 @@ def _parse_args():
     parser.add_option("-f", "--forth", type="int",
             help="print FORTH words forth (default=%s)" % DEFAULT_FORTH)
     parser.add_option("-q", "--quiet", action="store_true",
-            help="don't run say")
+            help="don't run say (default=%s)" % DEFAULT_QUIET)
     parser.add_option("-e", "--encoding",
             help="use this input/output encoding (default=%s)" %
             encoding.ENCODING)
     parser.set_defaults(back=DEFAULT_BACK, forth=DEFAULT_FORTH,
-            dict=DEFAULT_DICT)
+            dict=DEFAULT_DICT, quiet=DEFAULT_QUIET)
 
     options, args = parser.parse_args()
     if options.encoding:
