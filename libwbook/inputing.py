@@ -10,7 +10,7 @@ class Reader(object):
         if self.line:
             line = self.line
             self.line = ""
+            readline.add_history(line)
             return line
 
         return unicode(raw_input("wbook> "), self.input_encoding)
-
