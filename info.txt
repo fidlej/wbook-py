@@ -1,3 +1,7 @@
+Wbook
+=====
+Wbook is a readline wrapper around dictionaries.
+It provides a console interface to search the words in them.
 
 //-----------------------------------------------------------------
 TODO:

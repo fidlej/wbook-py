@@ -1,9 +1,9 @@
 
 import sys
-import os.path
 import logging
 
 from libwbook.encoding import out
+from libwbook.dating import apppath
 
 SEARCH_SEPARATOR = (
         "===============================================================")
@@ -30,8 +30,7 @@ class Outputer(object):
             return
 
         import subprocess
-        base = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-        cmd = os.path.join(base, "util", "wbook_say")
+        cmd = apppath("util", "wbook_say")
         args = [cmd, line]
         logging.debug("Executing: %r", args)
         subprocess.call(args, close_fds=True)
