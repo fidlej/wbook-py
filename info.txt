@@ -1,9 +1,5 @@
 
 //-----------------------------------------------------------------
 TODO:
-- Provide the -q option.
-
-Later:
 - Provide the completer for the words.
-- Detect the console encoding.
 
