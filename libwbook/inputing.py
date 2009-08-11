@@ -3,7 +3,7 @@ import readline
 
 class Reader(object):
     def __init__(self, line="", input_encoding="utf-8"):
-        self.line = line
+        self.line = unicode(line, input_encoding)
         self.input_encoding = input_encoding
 
     def read_line(self):
