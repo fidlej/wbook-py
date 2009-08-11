@@ -33,10 +33,11 @@ def _compare(row, line):
     return cmp(row.lower(), line.lower())
 
 class _FileAsList(object):
-    def __init__(self, filename, line_width=82):
+    def __init__(self, filename, line_width=82, file_encoding="iso-8859-2"):
         self.file = open(filename)
         self.line_width = line_width
         self.len = os.path.getsize(filename)//line_width
+        self.file_encoding=file_encoding
 
     def __getitem__(self, index):
         if isinstance(index, slice):
@@ -44,7 +45,7 @@ class _FileAsList(object):
             return [self[i] for i in xrange(*indices)]
         else:
             self.file.seek(self.line_width * index)
-            return self.file.read(self.line_width)
+            return unicode(self.file.read(self.line_width), self.file_encoding)
 
     def __len__(self):
         return self.len

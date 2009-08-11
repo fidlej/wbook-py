@@ -8,8 +8,9 @@ SEARCH_SEPARATOR = (
 SEPARATOR = "---------------------------------------------------------------"
 
 class Outputer(object):
-    def __init__(self, options):
+    def __init__(self, options, output_encoding="utf-8"):
         self.back = options.back
+        self.output_encoding = output_encoding
 
     def display(self, bresults, fresults):
         print SEARCH_SEPARATOR
@@ -19,7 +20,7 @@ class Outputer(object):
     def _display_results(self, results):
         if results:
             for row in results:
-                sys.stdout.write(row)
+                sys.stdout.write(row.encode(self.output_encoding))
             print SEPARATOR
 
     def say(self, line):

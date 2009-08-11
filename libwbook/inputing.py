@@ -2,8 +2,9 @@
 import readline
 
 class Reader(object):
-    def __init__(self, line=""):
+    def __init__(self, line="", input_encoding="utf-8"):
         self.line = line
+        self.input_encoding = input_encoding
 
     def read_line(self):
         if self.line:
@@ -11,5 +12,5 @@ class Reader(object):
             self.line = ""
             return line
 
-        return raw_input("wbook> ")
+        return unicode(raw_input("wbook> "), self.input_encoding)
 

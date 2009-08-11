@@ -1,13 +1,9 @@
 
 //-----------------------------------------------------------------
 TODO:
-- Register a project on the google code.
 
 Search:
-    - Ignore case.
-
-Display:
-    - Decode the dict into utf-8.
+    - Use the Czech sorting order for the comparison.
 
 Later:
 - Provide the data files.
