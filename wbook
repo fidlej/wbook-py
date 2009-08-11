@@ -1,15 +1,28 @@
 #!/usr/bin/env python
+"""\
+Usage: %prog [options] [word]
+Finds the given word in the dictionary.\
+"""
 
 import optparse
+import os.path
 from libwbook import inputing, searching, outputing
 
+base = os.path.dirname(os.path.realpath(__file__))
+DEFAULT_DICT = os.path.join(base, "data", "english.dict")
+DEFAULT_BACK = 3
+DEFAULT_FORTH = 15
+
 def _parse_args():
-    parser = optparse.OptionParser()
-    parser.add_option("-d", "--dict")
-    parser.add_option("-b", "--back", type="int")
-    parser.add_option("-f", "--forth", type="int")
-    parser.set_defaults(back=3, forth=15,
-            dict="/opt/wbook/share/wbook/final.eng")
+    parser = optparse.OptionParser(__doc__)
+    parser.add_option("-d", "--dict",
+            help="use DICT (default=%s)" % DEFAULT_DICT)
+    parser.add_option("-b", "--back", type="int",
+            help="print BACK words back (default=%s)" % DEFAULT_BACK)
+    parser.add_option("-f", "--forth", type="int",
+            help="print FORTH words forth (default=%s)" % DEFAULT_FORTH)
+    parser.set_defaults(back=DEFAULT_BACK, forth=DEFAULT_FORTH,
+            dict=DEFAULT_DICT)
 
     return parser.parse_args()
 

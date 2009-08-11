@@ -1,7 +1,8 @@
 
 //-----------------------------------------------------------------
 TODO:
+- Provide the -q option.
 
 Later:
+- Provide the completer for the words.
 - Provide the data files.
-- Put the first line also to the readline history.
