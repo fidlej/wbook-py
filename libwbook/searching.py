@@ -52,8 +52,8 @@ def _search_up(items, x):
         else: hi = mid
     return lo
 
-def startswith(row, line):
-    return _normalize(row).startswith(_normalize(line))
+def startswith(result, line):
+    return _normalize(result).startswith(_normalize(line))
 
 def _compare(row, line):
     return cmp(_normalize(row), _normalize(line))
