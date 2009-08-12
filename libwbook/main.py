@@ -3,6 +3,7 @@ Usage: %prog [options] [word]
 Finds the given word in the dictionary.\
 """
 
+import logging
 import optparse
 
 from libwbook import inputing, searching, outputing, encoding
@@ -23,6 +24,8 @@ def _parse_args():
             help="print FORTH words forth (default=%s)" % DEFAULT_FORTH)
     parser.add_option("-q", "--quiet", action="store_true",
             help="don't run say (default=%s)" % DEFAULT_QUIET)
+    parser.add_option("-v", "--verbose", action="store_true",
+            help="enable debug output")
     parser.add_option("-e", "--encoding",
             help="use this input/output encoding (default=%s)" %
             encoding.ENCODING)
@@ -32,14 +35,21 @@ def _parse_args():
     options, args = parser.parse_args()
     if options.encoding:
         encoding.ENCODING = options.encoding
+
+    if options.verbose:
+        level = logging.DEBUG
+    else:
+        level = logging.WARNING
+    logging.basicConfig(level=level)
+
     return options, args
 
 def main():
     options, args = _parse_args()
     arg_bytes = " ".join(args)
 
-    reader = inputing.Reader(arg_bytes)
     search = searching.Search(options)
+    reader = inputing.Reader(search, arg_bytes)
     outputer = outputing.Outputer(options)
     try:
         while True:

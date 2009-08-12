@@ -18,6 +18,13 @@ class Search(object):
         results = [self.dictionary[i] for i in xrange(start, end)]
         return self.dictionary[start:index], self.dictionary[index:end]
 
+    def find_forth(self, line, max_results):
+        """Returns forth_results for the given line.
+        """
+        index = _search_up(self.dictionary, line)
+        end = index + max_results
+        return self.dictionary[index:end]
+
 def _search_up(items, x):
     """Finds the index of x or before any value bigger than x.
     """
@@ -29,6 +36,9 @@ def _search_up(items, x):
         if _compare(items[mid], x) < 0: lo = mid+1
         else: hi = mid
     return lo
+
+def startswith(row, line):
+    return _normalize(row).startswith(_normalize(line))
 
 def _compare(row, line):
     return cmp(_normalize(row), _normalize(line))
