@@ -47,7 +47,7 @@ class LineCompleter(object):
             return self._stop(state)
 
         row = self.results[state]
-        result = row[:row.index("\0")].rstrip()
+        result = _extract_result(row, len(text))
         if searching.startswith(result, text):
             return out(result)
 
@@ -57,3 +57,12 @@ class LineCompleter(object):
     def _stop(self, state):
         self.results = []
         return None
+
+def _extract_result(row, input_len):
+    """Extracts the result from the row.
+    It strips the trailing spaces from the result,
+    but preserves them when they could be in the input text.
+    """
+    result = row[:row.index("\0")]
+    result = result[:input_len] + result[input_len:].rstrip()
+    return result

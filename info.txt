@@ -5,5 +5,3 @@ It provides a console interface to search the words in them.
 
 //-----------------------------------------------------------------
 TODO:
-- Support entered leading spaces by the completer.
-E.g. support 'how [tab]'.
