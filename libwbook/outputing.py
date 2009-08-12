@@ -21,8 +21,9 @@ class Outputer(object):
 
     def _display_results(self, results):
         if results:
-            for row in results:
-                sys.stdout.write(out(row))
+            for orig, translated in results:
+                line = "%-38s- %s\n" % (orig, translated)
+                sys.stdout.write(out(line))
             print SEPARATOR
 
     def say(self, line):

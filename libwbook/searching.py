@@ -16,14 +16,29 @@ class Search(object):
         start = max(0, index - self.back)
         end = index + self.forth
         results = [self.dictionary[i] for i in xrange(start, end)]
-        return self.dictionary[start:index], self.dictionary[index:end]
+        return (
+                _asresults(self.dictionary[start:index]),
+                _asresults(self.dictionary[index:end]))
 
     def find_forth(self, line, max_results):
         """Returns forth_results for the given line.
         """
         index = _search_up(self.dictionary, line)
         end = index + max_results
-        return self.dictionary[index:end]
+        return _asresults(self.dictionary[index:end])
+
+def _asresults(rows):
+    """Decodes (orig, translated) from each row.
+    """
+    results = []
+    for row in rows:
+        orig, translated, rest = row.split("\0")
+        assert rest == "\n"
+        orig = orig.rstrip()
+        translated = translated.rstrip()
+        results.append((orig, translated))
+
+    return results
 
 def _search_up(items, x):
     """Finds the index of x or before any value bigger than x.
