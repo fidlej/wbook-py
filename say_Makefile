@@ -16,13 +16,13 @@ extract:
 	gunzip cmudict.0.6.gz
 
 patch:
-	sed -i 's@/dev/sbdsp/@/dev/dsp/@' rsynth-2.0/config/linuxplay.c
+	sed -i 's@/dev/sbdsp@/dev/dsp@' rsynth-2.0/config/linuxplay.c
 	sed -i 's@\tmkdictdb@\t./mkdictdb@' rsynth-2.0/Makefile.in
 
 compile:
 	# The bDict will be used by default.
 	cd rsynth-2.0 && ./configure --host=linux --with-aDict=../cmudict.0.6 --with-bDict=../beep/beep-1.0
-	cd rsynth-2.0 && make
+	cd rsynth-2.0 && LDFLAGS=-lm make
 
 install:
 	cd rsynth-2.0 && make install
