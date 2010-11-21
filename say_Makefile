@@ -21,7 +21,9 @@ patch:
 
 compile:
 	# The bDict will be used by default.
+	rm -f rsynth-2.0/config.cache
 	cd rsynth-2.0 && ./configure --host=linux --with-aDict=../cmudict.0.6 --with-bDict=../beep/beep-1.0
+	if grep '^DICTS\s*=\s*$$' rsynth-2.0/Makefile >/dev/null ; then echo "Unable to prepare the dicts. Install libgdbm-dev first!" 2>&1 ; false ; fi
 	cd rsynth-2.0 && LDFLAGS=-lm make
 
 install:
